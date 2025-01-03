@@ -1,0 +1,20 @@
+package thread;
+import java.util.*;
+
+public class Songuyento extends Thread{
+    public static boolean check(int n){
+        for(int i = 2;i <= Math.sqrt(n);i++){
+            if(n % i == 0){
+                return false;
+            }
+        }
+        return true;
+    }
+    public void run(){
+        for(int i = 2;i <= 10000;i++){
+            if(check(i)){
+                System.out.print(i + " ");
+            }
+        }
+    }
+}

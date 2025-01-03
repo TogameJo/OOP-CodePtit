@@ -1,0 +1,34 @@
+package J07015;
+import java.util.*;
+import java.io.*;
+public class Main {
+    public static void main(String[] args ) throws IOException,ClassNotFoundException{
+        boolean[] ok = new boolean[1000005];
+        for(int i = 2;i < ok.length;i++){
+            ok[i] = true;
+            //danh dau cac chu so tu 2 tro di la true vi ban dau coi chung la snt
+        }
+        for(int i = 2;i <= (int)Math.sqrt(ok.length);i++){  //vd: i =2 ; i<= 1.000
+            if(ok[i]){
+                for(int j = i;j <= 1000005/i;j++){
+                    ok[i*j] = false; //boi so cua cac so nt k phai la snt
+                }
+            }
+        }
+        ObjectInputStream x = new ObjectInputStream(new FileInputStream("SONGUYEN.in"));
+        ArrayList<Integer> res = (ArrayList<Integer>) x.readObject();
+        TreeMap<Integer,Integer> v = new TreeMap<>();
+        res.forEach(a -> {
+            if(ok[a]){
+                if(v.get(a) == null){
+                    v.put(a,1);
+                }else{
+                    v.put(a,v.get(a)+1);
+                }
+            }
+        });
+        v.forEach((k,l) -> {
+            System.out.printf("%d %d",k,l);
+        });
+    }
+}
